@@ -29,8 +29,7 @@ const readWeatherFile = (filePath) => {
         }
 
         for(let i = 0; i < arr.length; i++) {
-            const currentDate = parseInt(arr[i].get(headers[0]));
-            const hTemp = parseInt(arr[i].get(headers[1]));
+            const hTemp = parseInt(arr[i].get(headers[1])); 
             const lTemp = parseInt(arr[i].get(headers[3]));
             const hHumid = parseInt(arr[i].get(headers[7]));
 
@@ -43,9 +42,10 @@ const readWeatherFile = (filePath) => {
         tempL /= arr.length;
         humid /= arr.length;
 
-        console.log("Highest mean humidity: " + humid.toString() + "%");
-        console.log("Highest mean temperature: " + tempH.toString() + "°C");
-        console.log("Lowest mean temperature: " + tempL.toString() + "°C");
+        console.log(`
+            Highest mean humidity: ${humid}"%
+            Highest mean temperature: ${tempH}°C
+            Lowest mean temperature: ${tempL}"°C`);
     });
 };
 
