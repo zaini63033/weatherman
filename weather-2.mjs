@@ -43,9 +43,9 @@ const readWeatherFile = (filePath) => {
         humid /= arr.length;
 
         console.log(`
-            Highest mean humidity: ${humid}"%
+            Highest mean humidity: ${humid}%
             Highest mean temperature: ${tempH}°C
-            Lowest mean temperature: ${tempL}"°C`);
+            Lowest mean temperature: ${tempL}°C`);
     });
 };
 
