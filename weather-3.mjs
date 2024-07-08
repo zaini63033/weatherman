@@ -32,8 +32,6 @@ const readWeatherFile = (filePath) => {
             const hTemp = arr[i].get(headers[1]);
             const lTemp = arr[i].get(headers[3]);
 
-            // Check for empty strings
-
             let hstring = '';
             let lstring = '';
 
