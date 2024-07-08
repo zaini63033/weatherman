@@ -26,13 +26,16 @@ const readWeatherFile = (filePath, record) => {
 
         for(let i = 0; i < arr.length; i++) {
             const currentDate = arr[i].get(headers[0]);
+
+
             const hTemp = arr[i].get(headers[1]);
             const lTemp = arr[i].get(headers[3]);
             const hHumid = arr[i].get(headers[7]);
 
-            if(lTemp < record.lowest) {
+            if(lTemp < record.lowest && lTemp.length > 0) {
                 record.lowest = lTemp;
                 record.lowestDate = currentDate;
+
             }
 
             if(hTemp > record.highest) {
@@ -72,9 +75,10 @@ rl.question('', (input) => {
         });
 
         setTimeout(() => {
-            console.log(`Highest humidity: ${record.humid}% on ${record.humidDate}`);
-            console.log(`Highest temperature: ${record.highest}°C on ${record.highestDate}`);
-            console.log(`Lowest temperature: ${record.lowest}°C on ${record.lowestDate}`);
+            console.log(`
+            Highest humidity: ${record.humid}% on ${record.humidDate}
+            Highest temperature: ${record.highest}°C on ${record.highestDate}
+            Lowest temperature: ${record.lowest}°C on ${record.lowestDate}`);
             rl.close();
         }, 1000); 
     });
