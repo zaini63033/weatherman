@@ -38,10 +38,12 @@ const readWeatherFile = (filePath) => {
             for(let j = 0; !isNaN(parseInt(hTemp)) && j < parseInt(hTemp); j++)
                 hstring += '+';
 
-            for(let j = 0; !isNaN(parseInt(lTemp)) && j < parseInt(lTemp); j++)
+            for(let j = 0; !isNaN(parseInt(lTemp)) && j < parseInt(lTemp); j++) 
                 lstring += '*';
 
-            console.log(currentDate + ' ' + hstring + lstring + ' ' + lstring + lTemp + '-' + hTemp);
+            
+            if(currentDate.length > 0)
+            console.log(`${currentDate} ${hstring}${lstring} ${lTemp}-${hTemp}`);
            
         }
 
