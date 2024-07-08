@@ -32,6 +32,8 @@ const readWeatherFile = (filePath) => {
             const hTemp = arr[i].get(headers[1]);
             const lTemp = arr[i].get(headers[3]);
 
+            // Check for empty strings
+
             let hstring = '';
             let lstring = '';
 
@@ -41,8 +43,13 @@ const readWeatherFile = (filePath) => {
             for(let j = 0; !isNaN(parseInt(lTemp)) && j < parseInt(lTemp); j++)
                 lstring += '*';
 
-            console.log(currentDate + ' ' + hstring + ' ' + hTemp);
-            console.log(currentDate + ' ' + lstring + ' ' + lTemp);
+
+            if(currentDate.length > 0)
+            {
+                console.log(`
+                    ${currentDate} ${hstring} ${hTemp} 
+                    ${currentDate} ${lstring} ${lTemp}`);
+            }
         }
 
       });
