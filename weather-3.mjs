@@ -1,36 +1,15 @@
-import { createInterface } from 'readline';
-import { readFile, readdir } from 'fs';
+import { DATE, HIGH_TEMP, LOW_TEMP } from './constants.mjs';
 
-const rl = createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+export const getBarChartSep = async ({record}) => {
 
-const readWeatherFile = (filePath) => {
-    const arr = [];
-    let tempH = 0;
-    let tempL = 0;
-
-    readFile(filePath, (err, data) => {
-        if (err) throw err;
-       
-        const content = data.toString();
-        const lines = content.split('\n');
-        const headers = lines[0].split(',');
-
-        for(let i = 1; i < lines.length; i++) {
-            const values = lines[i].split(',');
-            const obj = new Map();
-            for(let j = 0; j < values.length; j++) {
-                obj.set(headers[j], values[j]);
-            }
-            arr.push(obj);
-        }
-
-        for(let i = 0; i < arr.length; i++) {
-            const currentDate = arr[i].get(headers[0]);
-            const hTemp = arr[i].get(headers[1]);
-            const lTemp = arr[i].get(headers[3]);
+    try {
+        const values = record.values;
+        const attributes = record.attributes;
+    
+        for(let i = 0; i < values.length; i++) {
+            const currentDate = values[i].get(attributes[DATE]);
+            const hTemp = values[i].get(attributes[HIGH_TEMP]);
+            const lTemp = values[i].get(attributes[LOW_TEMP]);
 
             let hstring = '';
             let lstring = '';
@@ -46,27 +25,13 @@ const readWeatherFile = (filePath) => {
             {
                 console.log(`
                     ${currentDate} ${hstring} ${hTemp} 
-                    ${currentDate} ${lstring} ${lTemp}`);
+                    ${currentDate} ${lstring} ${lTemp}
+                    `);
             }
-        }
-
-      });
+        } 
+      } catch (error) {
+        throw new Error(error.message);
+      }
 };
 
 
-rl.question('', (input) => {
-    readdir(input, (err, files) => {
-        if (err) {
-          console.error('Error reading directory:', err);
-          return;
-        }
-       
-        files.forEach(file => {
-            if(file.includes("2011_Aug", 0)) {
-                 readWeatherFile(input + '\\' + file);
-            }
-        });
-    });
-
-    rl.close();
-});
