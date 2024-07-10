@@ -34,25 +34,25 @@ rl.question('', async (input) => {
                 highestDate: '0000-00-00',
                 lowestDate: '0000-00-00',
 
-                val : null,
-                att : null
+                values : null,
+                attributes : null
             };
 
             const promises = files.map(async (file) => {
                 if (file.includes(date, 0)) {
 
-                    const { values, attributes } = await readWeatherFile( `${filePath}\\${file}`);
-                    record.val = values;
-                    record.att = attributes; 
+                    const { values, attributes } = await readWeatherFile({path :`${filePath}\\${file}`});
+                    record.values = values;
+                    record.attributes = attributes; 
 
                     if(opt === '-a' || opt === '-e')
-                        await getYearlyRecord(record);
+                        await getYearlyRecord({record});
                     if(opt === '-b' || opt === '-e')
-                        await getMonthlyRecord(record);
+                        await getMonthlyRecord({record});
                     if(opt === '-c' || opt === '-e')
-                        await getBarChartSep(record);
+                        await getBarChartSep({record});
                     if(opt === '-d' || opt === '-e')
-                        await getBarChartComb(record);
+                        await getBarChartComb({record});
                 }
               });
           

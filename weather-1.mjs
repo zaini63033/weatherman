@@ -1,15 +1,15 @@
-import { DATE, HIGH_TEMP, LOW_TEMP, HIGH_HUMID } from './constant.mjs';
+import { DATE, HIGH_TEMP, LOW_TEMP, HIGH_HUMID } from './constants.mjs';
 
-export const getYearlyRecord = async (record) => {
+export const getYearlyRecord = async ({record}) => {
   try {
-    const values = record.val;
-    const attrib = record.att;
+    const values = record.values;
+    const attributes = record.attributes;
 
     for (let i = 0; i < values.length; i++) {
-      const currentDate = values[i].get(attrib[DATE]);
-      const hTemp = values[i].get(attrib[HIGH_TEMP]);
-      const lTemp = values[i].get(attrib[LOW_TEMP]);
-      const hHumid = values[i].get(attrib[HIGH_HUMID]);
+      const currentDate = values[i].get(attributes[DATE]);
+      const hTemp = values[i].get(attributes[HIGH_TEMP]);
+      const lTemp = values[i].get(attributes[LOW_TEMP]);
+      const hHumid = values[i].get(attributes[HIGH_HUMID]);
 
       if (lTemp < record.lowest && lTemp.length > 0) {
         record.lowest = lTemp;

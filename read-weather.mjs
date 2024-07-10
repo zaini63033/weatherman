@@ -3,13 +3,13 @@ import { promisify } from 'util';
 
 const readFileAsync = promisify(readFile);
 
-export const readWeatherFile = async (filePath) => {
+export const readWeatherFile = async ({path}) => {
 
   const values = [];
   let attributes = [];
 
   try {
-    const data = await readFileAsync(filePath);
+    const data = await readFileAsync(path);
     const content = data.toString();
     const lines = content.split('\n');
     attributes = lines[0].split(',');

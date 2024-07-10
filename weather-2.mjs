@@ -1,20 +1,20 @@
-import { HIGH_TEMP, LOW_TEMP, HIGH_HUMID } from './constant.mjs';
+import { HIGH_TEMP, LOW_TEMP, HIGH_HUMID } from './constants.mjs';
 
-export const getMonthlyRecord = async (record) => {
+export const getMonthlyRecord = async ({record}) => {
 
     try {
         
-        const values = record.val;
-        const attrib = record.att;
+        const values = record.values;
+        const attributes = record.attributes;
     
         let tempH = 0;
         let tempL = 0;
         let humid = 0;
 
         for(let i = 0; i < values.length; i++) {
-            const hTemp = parseInt(values[i].get(attrib[HIGH_TEMP])); 
-            const lTemp = parseInt(values[i].get(attrib[LOW_TEMP]));
-            const hHumid = parseInt(values[i].get(attrib[HIGH_HUMID]));
+            const hTemp = parseInt(values[i].get(attributes[HIGH_TEMP])); 
+            const lTemp = parseInt(values[i].get(attributes[LOW_TEMP]));
+            const hHumid = parseInt(values[i].get(attributes[HIGH_HUMID]));
 
             if(!isNaN(hTemp)) tempH += hTemp;
             if(!isNaN(lTemp)) tempL += lTemp;
